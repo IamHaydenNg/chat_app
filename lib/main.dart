@@ -1,4 +1,6 @@
 import 'package:chat_app/screens/auth.dart';
+import 'package:chat_app/screens/chat.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 // firebase_option automatically create by firebase done by flutterfire configure
 import 'firebase_options.dart'
@@ -24,7 +26,12 @@ class App extends StatelessWidget {
           seedColor: const Color.fromARGB(255, 63, 17, 177),
         ),
       ),
-      home: const AuthScreen(),
+      home: StreamBuilder(stream:FirebaseAuth.instance.authStateChanges() , builder: (ctx,snapshot){
+        if(snapshot.hasData) {
+          return const ChatScreen();
+        } 
+        return const AuthScreen();
+      }),
     );
   }
 }
