@@ -17,8 +17,8 @@ class _ChatScreenState extends State<ChatScreen> {
 
     await fcm.requestPermission();
     // this token is an encrypt address of your device.
-    final token = await fcm.getToken();
-    print(token);
+
+    fcm.subscribeToTopic('chat');
   }
 
   @override
